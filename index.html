@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Branches — Guía Visual</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav container">
+      <div class="brand">Git<span>Branches</span></div>
+      <a class="nav-link" href="#simulador">Simulador</a>
+    </nav>
+
+    <div class="container hero-grid">
+      <section>
+        <p class="eyebrow">Git + GitHub explicado visualmente</p>
+        <h1>Entendé las ramas de GitHub sin enredarte</h1>
+        <p class="hero-copy">
+          Una rama es una línea de trabajo independiente. Podés desarrollar una función,
+          probar cambios y recién después unirlos a <strong>main</strong> mediante un merge.
+        </p>
+        <div class="hero-actions">
+          <a href="#concepto" class="btn btn-primary">Empezar</a>
+          <a href="#flujo" class="btn btn-secondary">Ver flujo completo</a>
+        </div>
+      </section>
+
+      <section class="terminal-card" aria-label="Ejemplo de comandos Git">
+        <div class="terminal-top">
+          <span></span><span></span><span></span>
+          <small>terminal</small>
+        </div>
+        <pre><code><span class="muted"># Crear una rama nueva</span>
+git switch -c feature/login
+
+<span class="muted"># Trabajar y guardar cambios</span>
+git add .
+git commit -m "Agrega login"
+
+<span class="muted"># Subirla a GitHub</span>
+git push -u origin feature/login
+
+<span class="muted"># Volver a main y unirla</span>
+git switch main
+git merge feature/login</code></pre>
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <section id="concepto" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">1. Concepto</p>
+        <h2>¿Qué es una rama?</h2>
+      </div>
+
+      <div class="cards three">
+        <article class="card">
+          <div class="icon">🌳</div>
+          <h3>main</h3>
+          <p>Es la rama principal. Normalmente contiene la versión estable del proyecto.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🌿</div>
+          <h3>feature/login</h3>
+          <p>Una rama separada donde podés trabajar sin romper lo que ya funciona.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔀</div>
+          <h3>merge</h3>
+          <p>Es la operación que une los cambios de una rama con otra.</p>
+        </article>
+      </div>
+
+      <div class="branch-diagram" aria-label="Diagrama de ramas">
+        <div class="branch-label main-label">main</div>
+        <div class="commit main">A</div>
+        <div class="line horizontal line-main-1"></div>
+        <div class="commit main c2">B</div>
+        <div class="line split-line"></div>
+        <div class="line feature-line"></div>
+        <div class="commit feature f1">C</div>
+        <div class="line horizontal line-feature"></div>
+        <div class="commit feature f2">D</div>
+        <div class="line merge-line"></div>
+        <div class="commit main c3">E</div>
+        <div class="branch-label feature-label">feature/login</div>
+      </div>
+    </section>
+
+    <section class="section alt" id="crear">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">2. Crear una rama</p>
+          <h2>Dos formas correctas</h2>
+        </div>
+
+        <div class="cards two">
+          <article class="card code-card">
+            <span class="pill">Recomendada</span>
+            <h3>Crear y cambiarte a la rama</h3>
+            <div class="command-row">
+              <code>git switch -c feature/login</code>
+              <button class="copy-btn" data-copy="git switch -c feature/login">Copiar</button>
+            </div>
+            <p>Crea la rama y te mueve a ella inmediatamente.</p>
+          </article>
+
+          <article class="card code-card">
+            <span class="pill neutral">Forma clásica</span>
+            <h3>Con checkout</h3>
+            <div class="command-row">
+              <code>git checkout -b feature/login</code>
+              <button class="copy-btn" data-copy="git checkout -b feature/login">Copiar</button>
+            </div>
+            <p>Sigue siendo muy usada y produce prácticamente el mismo resultado.</p>
+          </article>
+        </div>
+
+        <div class="tip">
+          <strong>Importante:</strong> una rama local todavía no existe en GitHub. Para publicarla usá
+          <code>git push -u origin feature/login</code>.
+        </div>
+      </div>
+    </section>
+
+    <section id="flujo" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">3. Flujo de trabajo</p>
+        <h2>De main a merge, paso a paso</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="step">
+          <span class="step-number">1</span>
+          <div>
+            <h3>Actualizar main</h3>
+            <code>git switch main</code>
+            <code>git pull origin main</code>
+            <p>Empezá desde una versión actualizada para evitar conflictos innecesarios.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="step-number">2</span>
+          <div>
+            <h3>Crear tu rama</h3>
+            <code>git switch -c feature/login</code>
+            <p>Usá nombres descriptivos: <code>feature/</code>, <code>fix/</code>, <code>hotfix/</code>.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="step-number">3</span>
+          <div>
+            <h3>Modificar y hacer commits</h3>
+            <code>git add .</code>
+            <code>git commit -m "Agrega pantalla de login"</code>
+            <p>Los commits son puntos guardados dentro del historial de tu rama.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="step-number">4</span>
+          <div>
+            <h3>Subir la rama a GitHub</h3>
+            <code>git push -u origin feature/login</code>
+            <p>Ahora GitHub ya conoce tu rama y podés abrir un Pull Request.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="step-number">5</span>
+          <div>
+            <h3>Hacer Pull Request</h3>
+            <p>
+              En GitHub seleccionás <strong>Compare & pull request</strong>, revisás los cambios y pedís que
+              <strong>feature/login</strong> se incorpore a <strong>main</strong>.
+            </p>
+          </div>
+        </article>
+
+        <article class="step">
+          <span class="step-number">6</span>
+          <div>
+            <h3>Hacer merge</h3>
+            <code>git switch main</code>
+            <code>git merge feature/login</code>
+            <p>También puede hacerse desde el botón <strong>Merge pull request</strong> de GitHub.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt" id="merge">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">4. Merge</p>
+          <h2>¿Qué ocurre cuando unís ramas?</h2>
+        </div>
+
+        <div class="comparison">
+          <article class="card">
+            <h3>Antes</h3>
+            <pre class="mini-terminal">main:          A — B
+                    \
+feature/login:      C — D</pre>
+          </article>
+          <article class="card">
+            <h3>Después</h3>
+            <pre class="mini-terminal">main: A — B ———— M
+           \      /
+feature:    C — D</pre>
+          </article>
+        </div>
+
+        <div class="warning">
+          <h3>¿Y si hay un conflicto?</h3>
+          <p>
+            Sucede cuando dos ramas modifican de forma incompatible la misma parte de un archivo.
+            Git no decide por vos: marca el conflicto y te pide elegir qué contenido conservar.
+          </p>
+          <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+código de main
+=======
+código de feature/login
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login</code></pre>
+          <p>
+            Corregís el archivo, eliminás esas marcas y luego ejecutás
+            <code>git add .</code> y <code>git commit</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulador" class="section container">
+      <div class="section-heading">
+        <p class="eyebrow">5. Simulador</p>
+        <h2>Probá el flujo de ramas</h2>
+        <p>Usá los botones y observá cómo cambia el proyecto.</p>
+      </div>
+
+      <div class="simulator">
+        <div class="sim-controls">
+          <button id="resetBtn" class="btn btn-secondary">Reiniciar</button>
+          <button id="branchBtn" class="btn btn-primary">1. Crear rama</button>
+          <button id="commitBtn" class="btn btn-primary" disabled>2. Hacer commit</button>
+          <button id="mergeBtn" class="btn btn-primary" disabled>3. Merge a main</button>
+        </div>
+
+        <div class="sim-stage">
+          <div class="sim-row main-row">
+            <strong>main</strong>
+            <div class="sim-node">A</div>
+            <div class="sim-path"></div>
+            <div class="sim-node">B</div>
+            <div id="mergePath" class="sim-path hidden"></div>
+            <div id="mergeNode" class="sim-node merge-node hidden">M</div>
+          </div>
+
+          <div id="featureRow" class="sim-row feature-row hidden">
+            <strong>feature/login</strong>
+            <div class="spacer"></div>
+            <div class="branch-drop"></div>
+            <div id="featureNode" class="sim-node feature-node">C</div>
+            <div id="featureCommitPath" class="sim-path hidden"></div>
+            <div id="featureCommitNode" class="sim-node feature-node hidden">D</div>
+          </div>
+        </div>
+
+        <div class="sim-status">
+          <span>Estado:</span>
+          <strong id="simStatus">Estás en main. Todavía no hay una rama de trabajo.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cheat-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">6. Chuleta rápida</p>
+          <h2>Comandos que realmente vas a usar</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Acción</th>
+                <th>Comando</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Ver ramas</td><td><code>git branch</code></td></tr>
+              <tr><td>Crear rama</td><td><code>git branch nombre-rama</code></td></tr>
+              <tr><td>Crear y cambiar</td><td><code>git switch -c nombre-rama</code></td></tr>
+              <tr><td>Cambiar de rama</td><td><code>git switch main</code></td></tr>
+              <tr><td>Subir rama nueva</td><td><code>git push -u origin nombre-rama</code></td></tr>
+              <tr><td>Actualizar main</td><td><code>git pull origin main</code></td></tr>
+              <tr><td>Unir una rama</td><td><code>git merge nombre-rama</code></td></tr>
+              <tr><td>Borrar rama local</td><td><code>git branch -d nombre-rama</code></td></tr>
+              <tr><td>Borrar rama remota</td><td><code>git push origin --delete nombre-rama</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>Idea clave:</strong> main estable → crear rama → trabajar → commit → push → Pull Request → merge.
+    </div>
+  </footer>
+
+  <div id="toast" class="toast">Comando copiado</div>
+  <script src="script.js"></script>
+</body>
+</html>
